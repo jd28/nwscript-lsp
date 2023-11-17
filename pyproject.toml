@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nwscript-lsp"
+authors = [
+    {name = "jmd", email = "joshua.m.dean@gmail.com"},
+]
+version = "0.1.0"
+description = "nwscript language server"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "BSD-3-Clause"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "pygls",
+    "rollnw",
+]
