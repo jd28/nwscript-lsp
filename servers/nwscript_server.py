@@ -302,6 +302,11 @@ def text_document_hover(server: NWScriptLanguageServer, params: lsp.HoverParams)
     elif isinstance(decl_info.decl, rollnw.script.FunctionDefinition):
         display.append(
             f"**function** `{decl_info.decl.decl.identifier()}`")
+        info = f"→ `{decl_info.type}`\n\n"
+        if len(decl_info.decl.decl):
+            info += "Parameters\n\n"
+            for i in range(len(decl_info.decl.decl)):
+                info += f"* `{nss.type_name(decl_info.decl.decl[i])} {decl_info.decl.decl[i].identifier()}`\n\n"
         view = f"```nwscript\n{decl_info.view}\n```"
     elif isinstance(decl_info.decl, rollnw.script.StructDecl):
         display.append(f"### struct `{decl_info.type}`")
@@ -314,6 +319,35 @@ def text_document_hover(server: NWScriptLanguageServer, params: lsp.HoverParams)
         provider = f"Provided by `{decl_info.provider}`"
 
     return lsp.Hover([*display, provider, info, decl_info.comment.replace('\n', '\n\n'), view])
+
+
+@nwscript_server.feature(lsp.TEXT_DOCUMENT_INLAY_HINT)
+def inlay_hint(params: lsp.InlayHintParams):
+    text_doc = nwscript_server.workspace.get_text_document(
+        params.text_document.uri)
+    source = text_doc.source
+
+    nss = rollnw.script.Nss.from_string(
+        source, rollnw.script.LspContext(), text_doc.filename == "nwscript.nss")
+    nss.parse()
+    nss.process_includes()
+    nss.resolve()
+
+    src_range = rollnw.script.SourceRange()
+    src_range.start.line = params.range.start.line + 1
+    src_range.start.column = params.range.start.character
+    src_range.end.line = params.range.end.line + 1
+    src_range.end.column = params.range.end.character
+    hints = nss.inlay_hints(src_range)
+
+    log_to_output(str(len(hints)))
+
+    result = []
+    for hint in hints:
+        result.append(lsp.InlayHint(lsp.Position(
+            hint.position.line - 1, hint.position.column),  f"{hint.message}: "))
+
+    return result
 
 
 def add_arguments(parser):

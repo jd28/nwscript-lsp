@@ -7,7 +7,7 @@ name = "nwscript-lsp"
 authors = [
     {name = "jmd", email = "joshua.m.dean@gmail.com"},
 ]
-version = "0.1.0"
+version = "0.2.0"
 description = "nwscript language server"
 readme = "README.md"
 requires-python = ">=3.10"
