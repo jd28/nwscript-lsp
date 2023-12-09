@@ -1,21 +1,43 @@
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.7.1"]
+build-backend = "poetry.core.masonry.api"
 
-[project]
-name = "nwscript-lsp"
-authors = [
-    {name = "jmd", email = "joshua.m.dean@gmail.com"},
-]
+[tool.poetry]
+name = "nwscript-language-server"
 version = "0.2.0"
-description = "nwscript language server"
+description = "A language server for Bioware's nwscript"
+authors = ["jmd <joshua.m.dean@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.10"
-license = {text = "BSD-3-Clause"}
+homepage = "https://github.com/jd28/nwscript-lsp"
+repository = "https://github.com/jd28/nwscript-lsp"
+keywords = [
+    "nwscript",
+    "completion",
+    "lsp",
+    "language-server-protocol"
+]
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
-dependencies = [
-    "pygls",
-    "rollnw",
-]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+rollnw = "^0.20.dev0"
+pygls = "^1.1.0"
+cattrs = ">=23.1.2"
+docstring-to-markdown = "0.*"
+lsprotocol = ">=2022.0.0a9"
+
+[tool.poetry.dev-dependencies]
+PyHamcrest = "*"
+mypy = "*"
+nox = "*"
+pre-commit = "*"
+pytest = "*"
+pytest-cov = "*"
+python-lsp-jsonrpc = "*"
+ruff = "*"
+toml-sort = "*"
+
+[tool.poetry.scripts]
+nwscript-language-server = 'nwscript_language_server.cli:cli'
