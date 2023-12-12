@@ -143,31 +143,11 @@ def text_document_document_symbol(
     return result
 
 
-@SERVER.feature(lsp.WORKSPACE_DIAGNOSTIC)
-def workspace_diagnostic(
-    params: lsp.WorkspaceDiagnosticParams,
-) -> lsp.WorkspaceDiagnosticReport:
+@SERVER.feature(lsp.TEXT_DOCUMENT_DIAGNOSTIC)
+def text_document_diagnostic(params: lsp.DiagnosticOptions):
     """Returns diagnostic report."""
-    documents = SERVER.workspace.text_documents.keys()
 
-    items = []
-
-    if len(documents) > 0:
-        for d in documents:
-            document = SERVER.workspace.get_text_document(d)
-            SERVER.show_message_log(
-                f"Parsing nwscript file: {document.filename}")
-            items.append(
-                lsp.WorkspaceFullDocumentDiagnosticReport(
-                    uri=document.uri,
-                    version=document.version,
-                    items=_validate_nwscript(
-                        document.source, document.filename == "nswcript.nss"),
-                    kind=lsp.DocumentDiagnosticReportKind.Full,
-                )
-            )
-
-    return lsp.WorkspaceDiagnosticReport(items=items)
+    _validate(SERVER, params)
 
 
 def _function_to_snippet(script, function):
