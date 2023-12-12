@@ -6,7 +6,7 @@ import time
 import uuid
 import os
 import rollnw
-from typing import Optional
+from typing import Optional, List
 
 from lsprotocol import types as lsp
 
@@ -278,7 +278,8 @@ def text_document_hover(server: NWScriptLanguageServer, params: lsp.HoverParams)
         if len(decl_info.decl):
             info += "Parameters\n\n"
             for i in range(len(decl_info.decl)):
-                info += f"* `{nss.type_name(decl_info.decl[i])} {decl_info.decl[i].identifier()}`\n\n"
+                info += f"* `{nss.type_name(decl_info.decl[i])} {
+                    decl_info.decl[i].identifier()}`\n\n"
     elif isinstance(decl_info.decl, rollnw.script.FunctionDefinition):
         display.append(
             f"**function** `{decl_info.decl.decl.identifier()}`")
@@ -286,7 +287,8 @@ def text_document_hover(server: NWScriptLanguageServer, params: lsp.HoverParams)
         if len(decl_info.decl.decl):
             info += "Parameters\n\n"
             for i in range(len(decl_info.decl.decl)):
-                info += f"* `{nss.type_name(decl_info.decl.decl[i])} {decl_info.decl.decl[i].identifier()}`\n\n"
+                info += f"* `{nss.type_name(decl_info.decl.decl[i])} {
+                    decl_info.decl.decl[i].identifier()}`\n\n"
         view = f"```nwscript\n{decl_info.view}\n```"
     elif isinstance(decl_info.decl, rollnw.script.StructDecl):
         display.append(f"### struct `{decl_info.type}`")
@@ -302,7 +304,8 @@ def text_document_hover(server: NWScriptLanguageServer, params: lsp.HoverParams)
 
 
 @SERVER.feature(lsp.TEXT_DOCUMENT_INLAY_HINT)
-def inlay_hint(params: lsp.InlayHintParams):
+def inlay_hint(params: lsp.InlayHintParams) -> List[lsp.InlayHint]:
+
     text_doc = SERVER.workspace.get_text_document(
         params.text_document.uri)
     source = text_doc.source
