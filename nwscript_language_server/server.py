@@ -64,7 +64,7 @@ def _validate_nwscript(source, command_script: bool):
 
     for diag in nss.diagnostics():
         d = lsp.Diagnostic(
-            range=_convert_range(diag.location.range),
+            range=_convert_range(diag.location),
             message=diag.message,
             source=type(SERVER).__name__,
         )
@@ -331,3 +331,45 @@ def inlay_hint(params: lsp.InlayHintParams) -> List[lsp.InlayHint]:
             hint.position.line - 1, hint.position.column),  f"{hint.message}: "))
 
     return result
+
+
+@SERVER.feature(lsp.TEXT_DOCUMENT_SIGNATURE_HELP,
+                lsp.SignatureHelpOptions(trigger_characters=["(", ","]))
+def text_document_signature_help(params: lsp.SignatureHelpParams) -> Optional[lsp.SignatureHelp]:
+    log_to_output("TEXT_DOCUMENT_SIGNATURE_HELP")
+
+    text_doc = SERVER.workspace.get_text_document(
+        params.text_document.uri)
+    source = text_doc.source
+
+    nss = rollnw.script.Nss.from_string(
+        source, rollnw.script.LspContext(), text_doc.filename == "nwscript.nss")
+    nss.parse()
+    nss.process_includes()
+    nss.resolve()
+    sig_help = nss.signature_help(
+        params.position.line + 1, params.position.character)
+
+    if not isinstance(sig_help.expr, rollnw.script.CallExpression):
+        return
+
+    signatures = []
+
+    if isinstance(sig_help.decl, rollnw.script.FunctionDecl):
+        sig = lsp.SignatureInformation(sig_help.decl.identifier())
+        sig.parameters = [lsp.ParameterInformation(
+            sig_help.decl[i].identifier(),
+            lsp.MarkupContent(lsp.MarkupKind.Markdown,
+                              f"""```nwscript\n{nss.type_name(sig_help.decl[i])} {
+                                  sig_help.decl[i].identifier()}\n```""")
+        ) for i in range(len(sig_help.decl))]
+        signatures.append(sig)
+    elif isinstance(sig_help.decl, rollnw.script.FunctionDefinition):
+        sig = lsp.SignatureInformation(sig_help.decl.decl.identifier())
+        sig.parameters = [lsp.ParameterInformation(
+            sig_help.decl.decl[i].identifier()) for i in range(len(sig_help.decl.decl))]
+        signatures.append(sig)
+    else:
+        return
+
+    return lsp.SignatureHelp(signatures, 0, sig_help.active_param)
