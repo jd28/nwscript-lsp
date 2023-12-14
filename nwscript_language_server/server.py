@@ -326,7 +326,11 @@ def text_document_signature_help(params: lsp.SignatureHelpParams) -> Optional[ls
     elif isinstance(sig_help.decl, rollnw.script.FunctionDefinition):
         sig = lsp.SignatureInformation(sig_help.decl.decl.identifier())
         sig.parameters = [lsp.ParameterInformation(
-            sig_help.decl.decl[i].identifier()) for i in range(len(sig_help.decl.decl))]
+            sig_help.decl.decl[i].identifier(),
+            lsp.MarkupContent(lsp.MarkupKind.Markdown,
+                              f"""```nwscript\n{nss.type_name(sig_help.decl.decl[i])} {
+                                  sig_help.decl.decl[i].identifier()}\n```""")
+        ) for i in range(len(sig_help.decl.decl))]
         signatures.append(sig)
     else:
         return
