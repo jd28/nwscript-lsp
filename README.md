@@ -8,7 +8,8 @@ Currently, it implements:
 * Completions
 * Hover
 * Workspace Diagnostics
-* Document Symbos
+* Document Symbols
+* Signature Help
 
 ## Setup
 
