@@ -43,24 +43,24 @@ def _convert_range(range: rollnw.script.SourceRange) -> lsp.Range:
     return lsp.Range(_convert_position(range.start), _convert_position(range.end))
 
 
-def _validate(ls, params):
-    text_doc = ls.workspace.get_text_document(params.text_document.uri)
-    ls.show_message_log(f"Parsing nwscript file: {text_doc.filename}")
-    source = text_doc.source
-    diagnostics = _validate_nwscript(
-        source, text_doc.filename == "nwscript.nss") if source else []
-    ls.publish_diagnostics(text_doc.uri, diagnostics)
+def _load_nss(uri) -> rollnw.script.Nss:
+    text_doc = SERVER.workspace.get_text_document(uri)
+    SERVER.show_message_log(f"Parsing nwscript file: {text_doc.filename}")
 
-
-def _validate_nwscript(source, command_script: bool):
-    """Validates nwscript file."""
-    diagnostics = []
-
-    ctx = rollnw.script.LspContext()
-    nss = rollnw.script.Nss.from_string(source, ctx, command_script)
+    ctx = rollnw.script.Context()
+    nss = rollnw.script.Nss.from_string(
+        text_doc.source, ctx, text_doc.filename == "nwscript.nss")
     nss.parse()
     nss.process_includes()
     nss.resolve()
+
+    return nss, text_doc
+
+
+def _validate(ls, params):
+    nss, text_doc = _load_nss(params.text_document.uri)
+
+    diagnostics = []
 
     for diag in nss.diagnostics():
         d = lsp.Diagnostic(
@@ -70,7 +70,7 @@ def _validate_nwscript(source, command_script: bool):
         )
         diagnostics.append(d)
 
-    return diagnostics
+    ls.publish_diagnostics(params.text_document.uri, diagnostics)
 
 
 def log_to_output(
@@ -130,16 +130,8 @@ def text_document_document_symbol(
     server: NWScriptLanguageServer,
     params: lsp.DocumentSymbolParams
 ) -> [lsp.DocumentSymbol]:
-    text_doc = server.workspace.get_text_document(params.text_document.uri)
-    source = text_doc.source
-    nss = rollnw.script.Nss.from_string(
-        source, rollnw.script.LspContext(), text_doc.filename == "nwscript.nss")
-    nss.parse()
-    nss.process_includes()
-    nss.resolve()
-
+    nss, text_doc = _load_nss(params.text_document.uri)
     result = [_symbol_to_doc_symbol(nss, symbol) for symbol in nss.exports()]
-
     return result
 
 
@@ -208,14 +200,7 @@ def completions(params: Optional[lsp.CompletionParams] = None) -> lsp.Completion
     if params is None:
         return lsp.CompletionList(is_incomplete=False, items=[])
 
-    text_doc = SERVER.workspace.get_text_document(
-        params.text_document.uri)
-    source = text_doc.source
-    nss = rollnw.script.Nss.from_string(
-        source, rollnw.script.LspContext(), text_doc.filename == "nwscript.nss")
-    nss.parse()
-    nss.process_includes()
-    nss.resolve()
+    nss, text_doc = _load_nss(params.text_document.uri)
 
     items = []
     needle = text_doc.word_at_position(params.position)
@@ -241,15 +226,7 @@ def completions(params: Optional[lsp.CompletionParams] = None) -> lsp.Completion
 
 @SERVER.feature(lsp.TEXT_DOCUMENT_HOVER)
 def text_document_hover(server: NWScriptLanguageServer, params: lsp.HoverParams) -> Optional[lsp.Hover]:
-    text_doc = server.workspace.get_text_document(
-        params.text_document.uri)
-    source = text_doc.source
-
-    nss = rollnw.script.Nss.from_string(
-        source, rollnw.script.LspContext(), text_doc.filename == "nwscript.nss")
-    nss.parse()
-    nss.process_includes()
-    nss.resolve()
+    nss, text_doc = _load_nss(params.text_document.uri)
 
     needle = text_doc.word_at_position(params.position)
     decl_info = nss.locate_symbol(
@@ -305,16 +282,7 @@ def text_document_hover(server: NWScriptLanguageServer, params: lsp.HoverParams)
 
 @SERVER.feature(lsp.TEXT_DOCUMENT_INLAY_HINT)
 def inlay_hint(params: lsp.InlayHintParams) -> List[lsp.InlayHint]:
-
-    text_doc = SERVER.workspace.get_text_document(
-        params.text_document.uri)
-    source = text_doc.source
-
-    nss = rollnw.script.Nss.from_string(
-        source, rollnw.script.LspContext(), text_doc.filename == "nwscript.nss")
-    nss.parse()
-    nss.process_includes()
-    nss.resolve()
+    nss, text_doc = _load_nss(params.text_document.uri)
 
     src_range = rollnw.script.SourceRange()
     src_range.start.line = params.range.start.line + 1
@@ -336,17 +304,8 @@ def inlay_hint(params: lsp.InlayHintParams) -> List[lsp.InlayHint]:
 @SERVER.feature(lsp.TEXT_DOCUMENT_SIGNATURE_HELP,
                 lsp.SignatureHelpOptions(trigger_characters=["(", ","]))
 def text_document_signature_help(params: lsp.SignatureHelpParams) -> Optional[lsp.SignatureHelp]:
-    log_to_output("TEXT_DOCUMENT_SIGNATURE_HELP")
+    nss, text_doc = _load_nss(params.text_document.uri)
 
-    text_doc = SERVER.workspace.get_text_document(
-        params.text_document.uri)
-    source = text_doc.source
-
-    nss = rollnw.script.Nss.from_string(
-        source, rollnw.script.LspContext(), text_doc.filename == "nwscript.nss")
-    nss.parse()
-    nss.process_includes()
-    nss.resolve()
     sig_help = nss.signature_help(
         params.position.line + 1, params.position.character)
 
