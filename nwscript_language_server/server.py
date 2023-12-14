@@ -48,6 +48,7 @@ def _load_nss(uri) -> rollnw.script.Nss:
     SERVER.show_message_log(f"Parsing nwscript file: {text_doc.filename}")
 
     ctx = rollnw.script.Context()
+    ctx.add_include_path(os.path.dirname(text_doc.path))
     nss = rollnw.script.Nss.from_string(
         text_doc.source, ctx, text_doc.filename == "nwscript.nss")
     nss.parse()
