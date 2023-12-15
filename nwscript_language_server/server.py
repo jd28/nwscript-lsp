@@ -337,3 +337,10 @@ def text_document_signature_help(params: lsp.SignatureHelpParams) -> Optional[ls
         return
 
     return lsp.SignatureHelp(signatures, 0, sig_help.active_param)
+
+
+@SERVER.feature(lsp.INITIALIZE)
+def initialize(params: lsp.InitializeParams):
+    rollnw.kernel.start()
+
+    # [TODO] All client capabilities:
