@@ -14,6 +14,7 @@ from pygls.server import LanguageServer
 
 COUNT_DOWN_START_IN_SECONDS = 10
 COUNT_DOWN_SLEEP_IN_SECONDS = 1
+from . import markup
 
 
 class NWScriptLanguageServer(LanguageServer):
@@ -33,6 +34,17 @@ class NWScriptLanguageServer(LanguageServer):
 
 
 SERVER = NWScriptLanguageServer("nwscript-language-server", "v0.2.0")
+
+
+def _choose_markup(server: NWScriptLanguageServer) -> lsp.MarkupKind:
+    """Returns the preferred or first of supported markup kinds."""
+    markup_supported = get_capability(
+        server.client_capabilities,
+        "text_document.completion.completion_item.documentation_format",
+        [lsp.MarkupKind.PlainText],
+    )
+
+    return markup_supported[0]
 
 
 def _convert_position(position: rollnw.script.SourcePosition) -> lsp.Position:
@@ -236,49 +248,17 @@ def text_document_hover(server: NWScriptLanguageServer, params: lsp.HoverParams)
     if decl_info.decl is None:
         return
 
-    display = []
-    view = f"```nwscript\n{decl_info.view}\n```"
-    info = ""
+    markup_kind = _choose_markup(server)
     if isinstance(decl_info.decl, rollnw.script.VarDecl):
-        if decl_info.kind == rollnw.script.SymbolKind.param:
-            kind_str = "param"
-        elif decl_info.kind == rollnw.script.SymbolKind.field:
-            kind_str = "field"
-        else:
-            kind_str = "variable"
-        display.append(
-            f"### **{kind_str} `{decl_info.decl.identifier()}`**")
-        display.append(f"Type: `{decl_info.type}`")
+        return lsp.Hover(markup.hover_var_decl(decl_info, markup_kind))
     elif isinstance(decl_info.decl, rollnw.script.FunctionDecl):
-        display.append(
-            f"### **function** `{decl_info.decl.identifier()}`")
-        info = f"→ `{decl_info.type}`\n\n"
-        if len(decl_info.decl):
-            info += "Parameters\n\n"
-            for i in range(len(decl_info.decl)):
-                info += f"* `{nss.type_name(decl_info.decl[i])} {
-                    decl_info.decl[i].identifier()}`\n\n"
+        return lsp.Hover(markup.hover_func_decl(nss, decl_info, markup_kind))
     elif isinstance(decl_info.decl, rollnw.script.FunctionDefinition):
-        display.append(
-            f"**function** `{decl_info.decl.decl.identifier()}`")
-        info = f"→ `{decl_info.type}`\n\n"
-        if len(decl_info.decl.decl):
-            info += "Parameters\n\n"
-            for i in range(len(decl_info.decl.decl)):
-                info += f"* `{nss.type_name(decl_info.decl.decl[i])} {
-                    decl_info.decl.decl[i].identifier()}`\n\n"
-        view = f"```nwscript\n{decl_info.view}\n```"
+        return lsp.Hover(markup.hover_func_decl(nss, decl_info, markup_kind))
     elif isinstance(decl_info.decl, rollnw.script.StructDecl):
-        display.append(f"### struct `{decl_info.type}`")
-        view = f"```nwscript\nstruct {decl_info.type} {{}}\n```"
+        return lsp.Hover(markup.hover_struct_decl(nss, decl_info, markup_kind))
     else:
         return
-
-    provider = ""
-    if len(decl_info.provider):
-        provider = f"Provided by `{decl_info.provider}`"
-
-    return lsp.Hover([*display, provider, info, decl_info.comment.replace('\n', '\n\n'), view])
 
 
 @SERVER.feature(lsp.TEXT_DOCUMENT_INLAY_HINT)
@@ -319,18 +299,16 @@ def text_document_signature_help(params: lsp.SignatureHelpParams) -> Optional[ls
         sig = lsp.SignatureInformation(sig_help.decl.identifier())
         sig.parameters = [lsp.ParameterInformation(
             sig_help.decl[i].identifier(),
-            lsp.MarkupContent(lsp.MarkupKind.Markdown,
-                              f"""```nwscript\n{nss.type_name(sig_help.decl[i])} {
-                                  sig_help.decl[i].identifier()}\n```""")
+            markup.code_block(f"""{nss.type_name(sig_help.decl.decl[i])} {
+                sig_help.decl.decl[i].identifier()}""")
         ) for i in range(len(sig_help.decl))]
         signatures.append(sig)
     elif isinstance(sig_help.decl, rollnw.script.FunctionDefinition):
         sig = lsp.SignatureInformation(sig_help.decl.decl.identifier())
         sig.parameters = [lsp.ParameterInformation(
             sig_help.decl.decl[i].identifier(),
-            lsp.MarkupContent(lsp.MarkupKind.Markdown,
-                              f"""```nwscript\n{nss.type_name(sig_help.decl.decl[i])} {
-                                  sig_help.decl.decl[i].identifier()}\n```""")
+            markup.code_block(f"""{nss.type_name(sig_help.decl.decl[i])} {
+                sig_help.decl.decl[i].identifier()}""")
         ) for i in range(len(sig_help.decl.decl))]
         signatures.append(sig)
     else:
