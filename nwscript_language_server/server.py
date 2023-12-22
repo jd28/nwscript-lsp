@@ -1,6 +1,7 @@
 import argparse
 import asyncio
 import json
+import glob
 import re
 import time
 import uuid
@@ -10,25 +11,23 @@ from typing import Optional, List
 
 from lsprotocol import types as lsp
 
+from pygls.capabilities import get_capability
 from pygls.server import LanguageServer
 
-COUNT_DOWN_START_IN_SECONDS = 10
-COUNT_DOWN_SLEEP_IN_SECONDS = 1
 from . import markup
 
 
+def find_files_with_extension(start_path, file_extension, unique_paths=set()):
+    for root, dirs, files in os.walk(start_path):
+        for file in files:
+            if file.endswith(file_extension):
+                unique_paths.add(root)
+                break
+
+    return list(unique_paths)
+
+
 class NWScriptLanguageServer(LanguageServer):
-    CMD_COUNT_DOWN_BLOCKING = "countDownBlocking"
-    CMD_COUNT_DOWN_NON_BLOCKING = "countDownNonBlocking"
-    CMD_PROGRESS = "progress"
-    CMD_REGISTER_COMPLETIONS = "registerCompletions"
-    CMD_SHOW_CONFIGURATION_ASYNC = "showConfigurationAsync"
-    CMD_SHOW_CONFIGURATION_CALLBACK = "showConfigurationCallback"
-    CMD_SHOW_CONFIGURATION_THREAD = "showConfigurationThread"
-    CMD_UNREGISTER_COMPLETIONS = "unregisterCompletions"
-
-    CONFIGURATION_SECTION = "pygls.nwscriptServer"
-
     def __init__(self, *args):
         super().__init__(*args)
 
@@ -60,7 +59,14 @@ def _load_nss(uri) -> rollnw.script.Nss:
     SERVER.show_message_log(f"Parsing nwscript file: {text_doc.filename}")
 
     ctx = rollnw.script.Context()
+
+    paths = find_files_with_extension(SERVER.workspace.root_path, ".nss")
     ctx.add_include_path(os.path.dirname(text_doc.path))
+    for p in paths:
+        if p == text_doc.path:
+            continue
+        ctx.add_include_path(p)
+
     nss = rollnw.script.Nss.from_string(
         text_doc.source, ctx, text_doc.filename == "nwscript.nss")
     nss.parse()
