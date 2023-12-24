@@ -32,7 +32,7 @@ class NWScriptLanguageServer(LanguageServer):
         super().__init__(*args)
 
 
-SERVER = NWScriptLanguageServer("nwscript-language-server", "v0.2.0")
+SERVER = NWScriptLanguageServer("nwscript-language-server", "v0.6.0")
 
 
 def _choose_markup(server: NWScriptLanguageServer) -> lsp.MarkupKind:
@@ -58,14 +58,9 @@ def _load_nss(uri) -> rollnw.script.Nss:
     text_doc = SERVER.workspace.get_text_document(uri)
     SERVER.show_message_log(f"Parsing nwscript file: {text_doc.filename}")
 
-    ctx = rollnw.script.Context()
-
-    paths = find_files_with_extension(SERVER.workspace.root_path, ".nss")
-    ctx.add_include_path(os.path.dirname(text_doc.path))
-    for p in paths:
-        if p == text_doc.path:
-            continue
-        ctx.add_include_path(p)
+    paths = find_files_with_extension(
+        SERVER.workspace.root_path, ".nss", set(os.path.dirname(text_doc.path)))
+    ctx = rollnw.script.Context(paths)
 
     nss = rollnw.script.Nss.from_string(
         text_doc.source, ctx, text_doc.filename == "nwscript.nss")
