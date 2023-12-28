@@ -54,6 +54,17 @@ def _convert_range(range: rollnw.script.SourceRange) -> lsp.Range:
     return lsp.Range(_convert_position(range.start), _convert_position(range.end))
 
 
+def _convert_severity(severity: rollnw.script.DiagnosticSeverity) -> lsp.DiagnosticSeverity:
+    if severity == rollnw.script.DiagnosticSeverity.error:
+        return lsp.DiagnosticSeverity.Error
+    elif severity == rollnw.script.DiagnosticSeverity.hint:
+        return lsp.DiagnosticSeverity.Hint
+    elif severity == rollnw.script.DiagnosticSeverity.warning:
+        return lsp.DiagnosticSeverity.Warning
+    else:
+        return lsp.DiagnosticSeverity.Information
+
+
 def _load_nss(uri) -> rollnw.script.Nss:
     text_doc = SERVER.workspace.get_text_document(uri)
     SERVER.show_message_log(f"Parsing nwscript file: {text_doc.filename}")
@@ -81,7 +92,7 @@ def _validate(ls, params):
             range=_convert_range(diag.location),
             message=diag.message,
             source=type(SERVER).__name__,
-        )
+            severity=_convert_severity(diag.severity))
         diagnostics.append(d)
 
     ls.publish_diagnostics(params.text_document.uri, diagnostics)
