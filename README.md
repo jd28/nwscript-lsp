@@ -11,7 +11,102 @@ Currently, it implements:
 * Document Symbols
 * Signature Help
 
-## Setup
+## Setup - Neovim
+
+1. Install the language server
+   ```
+   python -m pip install nwscript-language-server
+   ```
+
+1. Make sure ``nwscript-language-server`` is on your PATH!
+
+1. Setup neovim config - Obviously people's tastes will differ here and not all of it is fully implemented.
+   ```lua
+   require("config.lazy")
+
+   vim.api.nvim_exec(
+   [[
+   autocmd FileType nwscript setlocal lsp
+   ]],
+   false
+   )
+
+   local lspconfig = require("lspconfig")
+   local configs = require("lspconfig.configs")
+
+   if not configs.nwscript_language_server then
+   configs.nwscript_language_server = {
+      default_config = {
+         cmd = { "nwscript-language-server" },
+         filetypes = { "nwscript" },
+         root_dir = lspconfig.util.root_pattern(".git", "nasher.cfg"),
+      },
+   }
+   end
+
+   lspconfig.nwscript_language_server.setup({
+   on_attach = function(client, bufnr)
+      -- Custom on_attach function (optional)
+      print("nwscript language server attached!")
+
+      require("lsp_signature").on_attach({
+         bind = true, -- This is mandatory, otherwise border config won't get registered.
+         handler_opts = {
+         border = "rounded",
+         },
+      }, bufnr)
+
+      -- Enable snippet support (if your completion plugin supports snippets)
+      vim.bo[bufnr].expandtab = false
+      vim.bo[bufnr].shiftwidth = 4
+   end,
+   settings = {
+      ["nwscript-language-server"] = {
+         disableSnippets = "on",
+      },
+   },
+   })
+
+   -- Global mappings.
+   -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+   vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+   vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+   vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+
+   -- Use LspAttach autocommand to only map the following keys
+   -- after the language server attaches to the current buffer
+   vim.api.nvim_create_autocmd("LspAttach", {
+   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+   callback = function(ev)
+      -- Enable completion triggered by <c-x><c-o>
+      vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+      -- Buffer local mappings.
+      -- See `:help vim.lsp.*` for documentation on any of the below functions
+      local opts = { buffer = ev.buf }
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+      vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+      vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
+      vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
+      vim.keymap.set("n", "<space>wl", function()
+         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+      end, opts)
+      vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
+      vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+      vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+      vim.keymap.set("n", "<space>f", function()
+         vim.lsp.buf.format({ async = true })
+      end, opts)
+   end,
+   })
+   ```
+
+## Setup - VS Code Extension debug mode
 
 ### Install Server Dependencies
 
