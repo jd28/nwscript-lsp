@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "nwscript-language-server"
-version = "0.7.dev0"
+version = "0.8.dev0"
 description = "A language server for Bioware's nwscript"
 authors = ["jmd <joshua.m.dean@gmail.com>"]
 readme = "README.md"
@@ -22,7 +22,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-rollnw = "^0.24.dev0"
+rollnw = "^0.25.dev0"
 pygls = "^1.2.1"
 cattrs = ">=23.1.2"
 docstring-to-markdown = "0.*"
