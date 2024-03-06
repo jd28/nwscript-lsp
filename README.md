@@ -1,5 +1,8 @@
 # nwscript-lsp
 
+[![PyPI version](https://badge.fury.io/py/nwscript-language-server.svg)](https://badge.fury.io/py/nwscript-language-server)
+
+
 The LSP is built on [pygls](https://github.com/openlawlibrary/pygls) and [rollnw](https://github.com/jd28/rollnw).  It is derived from the [Pygls Playground](https://github.com/openlawlibrary/pygls/tree/main/examples/vscode-playground) and aims, at this point, only to be a tested bed for implementing LSP features.  A more robust implementation will come later maybe integrating with [nasher.cfg](https://github.com/squattingmonk/nasher#nashercfg).  For now only the current document path will be added to the include path of the script context resman.
 
 That the testbed extension is for vscode is out of simplicity, obviously plugins for any LSP client emacs, (neo)vim, etc will be supported.
