@@ -24,10 +24,10 @@ Currently, it implements:
    ```
 
 Note: Sometimes "--break-system-packages" is needed to install
-    ```
+   ```
     python -m pip install --break-system-packages rollnw
     python -m pip install --break-system-packages nwscript-language-server
-    ```
+   ```
 
 3. Make sure ``nwscript-language-server`` is on your PATH!
 
