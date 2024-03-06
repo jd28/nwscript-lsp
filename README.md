@@ -13,14 +13,25 @@ Currently, it implements:
 
 ## Setup - Neovim
 
-1. Install the language server
+1. Install required package
+   ```
+   python -m pip install rollnw
+   ```
+
+2. Install the language server
    ```
    python -m pip install nwscript-language-server
    ```
 
-1. Make sure ``nwscript-language-server`` is on your PATH!
+Note: Sometimes "--break-system-packages" is needed to install
+   ```
+    python -m pip install --break-system-packages rollnw
+    python -m pip install --break-system-packages nwscript-language-server
+   ```
 
-1. Setup neovim config - Obviously people's tastes will differ here and not all of it is fully implemented.
+3. Make sure ``nwscript-language-server`` is on your PATH!
+
+4. Setup neovim config - Obviously people's tastes will differ here and not all of it is fully implemented.
    ```lua
    require("config.lazy")
 
@@ -117,7 +128,7 @@ Open a terminal in the repository's root directory
    python -m venv env
    ```
 
-1. Install pygls
+2. Install pygls
    ```
    python -m pip install -r requirements.txt
    ```
@@ -131,7 +142,7 @@ Open terminal in the same directory as this file and execute following commands:
    ```
    npm install
    ```
-1. Compile the extension
+2. Compile the extension
 
    ```
    npm run compile
@@ -142,14 +153,14 @@ Open terminal in the same directory as this file and execute following commands:
 
 1. Open this directory in VS Code
 
-1. The playground relies on the [Python extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.python) for choosing the appropriate Python environment in which to run the example language servers.
+2. The playground relies on the [Python extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.python) for choosing the appropriate Python environment in which to run the example language servers.
    If you haven't already, you will need to install it and reload the window.
 
-1. Open the Run and Debug view (`ctrl + shift + D`)
+3. Open the Run and Debug view (`ctrl + shift + D`)
 
-1. Select `Launch Client` and press `F5`, this will open a second VSCode window with the `vscode-playground` extension enabled.
+4. Select `Launch Client` and press `F5`, this will open a second VSCode window with the `vscode-playground` extension enabled.
 
-1. You will need to make sure that VSCode is using a virtual environment that contains an installation of `pygls`.
+5. You will need to make sure that VSCode is using a virtual environment that contains an installation of `pygls`.
    The `Python: Select Interpreter` command can be used to pick the correct one.
 
    Alternatively, you can set the `pygls.server.pythonPath` option in the `.vscode/settings.json` file
