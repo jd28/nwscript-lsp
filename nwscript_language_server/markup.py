@@ -33,9 +33,9 @@ def hover_func_decl(nss: nws.Nss, symbol: nws.Symbol, markup_kind: lsp.MarkupKin
 
         if len(symbol.comment):
             lines.append(
-                "\n\n```nwscript\n//{" +
+                "\n\n```nwscript\n//" +
                 symbol.comment.replace('\n', '\n//') +
-                "}\n```"
+                "\n```"
             )
 
         lines.append(f"\n```nwscript\n{symbol.view}\n```")
@@ -56,9 +56,9 @@ def hover_func_decl(nss: nws.Nss, symbol: nws.Symbol, markup_kind: lsp.MarkupKin
 
         if len(symbol.comment):
             lines.append(
-                "\n\n//{" +
+                "\n\n//" +
                 symbol.comment.replace('\n', '\n//') +
-                "}"
+                "\n"
             )
 
         lines.append(f"\n{symbol.view}")
@@ -77,9 +77,9 @@ def hover_struct_decl(nss: nws.Nss, symbol: nws.Symbol, markup_kind: lsp.MarkupK
 
         if len(symbol.comment):
             lines.append(
-                "\n\n```nwscript\n//{" +
+                "\n\n```nwscript\n//" +
                 symbol.comment.replace('\n', '\n//') +
-                "}\n```"
+                "\n```"
             )
 
         lines.append(f"\n\n```nwscript\nstruct {symbol.type} {{}}\n```")
@@ -93,9 +93,9 @@ def hover_struct_decl(nss: nws.Nss, symbol: nws.Symbol, markup_kind: lsp.MarkupK
 
         if len(symbol.comment):
             lines.append(
-                "\n\n//{" +
+                "\n\n//" +
                 symbol.comment.replace('\n', '\n//') +
-                "}"
+                "\n"
             )
 
         lines.append(f"struct {symbol.type} {{}}")
@@ -122,9 +122,9 @@ def hover_var_decl(symbol: nws.Symbol, markup_kind: lsp.MarkupKind) -> lsp.Marku
 
         if len(symbol.comment):
             lines.append(
-                "\n\n```nwscript\n//{" +
+                "\n\n```nwscript\n//" +
                 symbol.comment.replace('\n', '\n//') +
-                "}\n```"
+                "\n```"
             )
 
         lines.append(f"\n\n```nwscript\n{symbol.view}\n```")
