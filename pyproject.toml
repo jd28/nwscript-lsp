@@ -22,7 +22,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-rollnw = "^0.25.dev0"
+rollnw = "^0"
 pygls = "^1.2.1"
 cattrs = ">=23.1.2"
 docstring-to-markdown = "0.*"
