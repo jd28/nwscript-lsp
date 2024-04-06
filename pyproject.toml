@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "nwscript-language-server"
-version = "0.9.dev0"
+version = "0.10.dev0"
 description = "A language server for Bioware's nwscript"
 authors = ["jmd <joshua.m.dean@gmail.com>"]
 readme = "README.md"
