@@ -86,8 +86,14 @@ def _validate(ls, params):
     nss, text_doc = _load_nss(params.text_document.uri)
 
     diagnostics = []
-
+    error_lines = set()
     for diag in nss.diagnostics():
+        if diag.severity == rollnw.script.DiagnosticSeverity.error:
+            if diag.location.start.line in error_lines:
+                continue
+            else:
+                error_lines.add(diag.location.start.line)
+
         d = lsp.Diagnostic(
             range=_convert_range(diag.location),
             message=diag.message,
