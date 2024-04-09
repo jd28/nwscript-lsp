@@ -561,21 +561,21 @@ files = [
 
 [[package]]
 name = "rollnw"
-version = "0.27.dev0"
+version = "0.28.dev0"
 description = "An homage to Neverwinter Nights"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "rollnw-0.27.dev0-cp310-cp310-macosx_12_0_x86_64.whl", hash = "sha256:5c7393e89c6cff1e157d67b9bd26db39777976019218df660a390d07fa9f1bd8"},
-    {file = "rollnw-0.27.dev0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4cecffc2b8f68e276f48be4b85629267ebb633c5f11c150a3a73346b8ba40e91"},
-    {file = "rollnw-0.27.dev0-cp310-cp310-win_amd64.whl", hash = "sha256:eb00bc27a62943e4865bab15b6767562014e1d4e9fbbb005c4454cd17be7cc4b"},
-    {file = "rollnw-0.27.dev0-cp311-cp311-macosx_12_0_x86_64.whl", hash = "sha256:13087025bb89baac5dba1e109ac5389532ad60db4502a92187b6516ba3a255f0"},
-    {file = "rollnw-0.27.dev0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e118b763b9d94b35028df9b31c4a83076a2bedf046a03ad96d67ff7f5444f01a"},
-    {file = "rollnw-0.27.dev0-cp311-cp311-win_amd64.whl", hash = "sha256:72ba7f56ecd3ca0e6fa5578f43cc6ccdc7a325668036fb180756411bfd1b4fb6"},
-    {file = "rollnw-0.27.dev0-cp312-cp312-macosx_12_0_x86_64.whl", hash = "sha256:9df64f6f53bfa23cb698581f11b31f92bc9947ad1fdc367e0a7a0a79c0941779"},
-    {file = "rollnw-0.27.dev0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4deceb176b96d71d6d9e0aa5b4b4eba195f9f49db3168e95402e5a4034574812"},
-    {file = "rollnw-0.27.dev0-cp312-cp312-win_amd64.whl", hash = "sha256:b47d30abe173839450b2bd86f14fb831ed4170955f26df23b6288d4110c71632"},
-    {file = "rollnw-0.27.dev0.tar.gz", hash = "sha256:3cb874e9fdd63e7a6a40bf0e915154fb04003868767f7ebfe8d33519f54007a1"},
+    {file = "rollnw-0.28.dev0-cp310-cp310-macosx_12_0_x86_64.whl", hash = "sha256:dd8cedc9e86f7001c883571d0a27ffc3e2c15cce2980457fd7f6e070f9e9e327"},
+    {file = "rollnw-0.28.dev0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6d8e2c31242bbae73f94f8d749869b381c512024e02745cd147619f8e7ddb7ce"},
+    {file = "rollnw-0.28.dev0-cp310-cp310-win_amd64.whl", hash = "sha256:672ea7cca87e3a7da537ec41ca14304d58ad40df53c749ad30d84b48adf71d4e"},
+    {file = "rollnw-0.28.dev0-cp311-cp311-macosx_12_0_x86_64.whl", hash = "sha256:827f5cb778b2a1671e673f79d4dc5ae4fd25e2e22c96576c628d0197efea2bf2"},
+    {file = "rollnw-0.28.dev0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:74a90c24aadf50c625261c7533d6a73e42f89972abd9b0dd038e2af4b7e6388a"},
+    {file = "rollnw-0.28.dev0-cp311-cp311-win_amd64.whl", hash = "sha256:03361429ca17daa3e4fdbdd056c193e1bd51ef93ded70eb2af65fa0dcf252866"},
+    {file = "rollnw-0.28.dev0-cp312-cp312-macosx_12_0_x86_64.whl", hash = "sha256:9350fd5f0f381fb275f98c564dce0d6e73d4ff82703fc0c3b296d626290521ad"},
+    {file = "rollnw-0.28.dev0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:05cdae372143bb9b940a2b8f978b2792348ca8a65c47cedae27c531f6379f0b0"},
+    {file = "rollnw-0.28.dev0-cp312-cp312-win_amd64.whl", hash = "sha256:c56ad0401fa95bee570f36b9aaec1a59910698a5b6e4cb2fef20e91376fbb9cf"},
+    {file = "rollnw-0.28.dev0.tar.gz", hash = "sha256:0d2c99ecfafd5b02ec41d4bd4632b88defdd295022e7a079495c90e136f8728f"},
 ]
 
 [package.extras]
