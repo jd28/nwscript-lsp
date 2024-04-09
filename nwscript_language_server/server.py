@@ -241,10 +241,10 @@ def completions(params: Optional[lsp.CompletionParams] = None) -> lsp.Completion
         word = nl.split()[-1]
         character = text_doc.lines[params.position.line].find(word)
         completions = nss.complete_dot(
-            word, params.position.line + 1, character)
+            word, params.position.line + 1, character, True)
     else:
         completions = nss.complete_at(
-            needle, params.position.line + 1, params.position.character)
+            needle, params.position.line + 1, params.position.character, True)
 
     SERVER.show_message_log(str(len(completions)))
     items = [_symbol_to_completion_item(nss, item) for item in completions]
