@@ -42,3 +42,4 @@ toml-sort = "*"
 
 [tool.poetry.scripts]
 nwscriptd = 'arclight.nwscriptd.cli:cli'
+nwscript-lint = 'arclight.nwscript_lint.main:main'
