@@ -22,7 +22,7 @@ def main():
     parser.add_argument(
         '--no-user',
         action='store_true',
-        help="Disable user-level configuration.",
+        help="Disable user install files.",
     )
 
     parser.add_argument(

@@ -35,7 +35,7 @@ options:
   -I INCLUDE, --include INCLUDE
                         Include path(s).
   --no-install          Disable loading game install files.
-  --no-user             Disable user-level configuration.
+  --no-user             Disable user install files.
 ```
 
 Sample output:
