@@ -13,18 +13,18 @@ def get_version() -> str:
 def cli() -> None:
     """NWScript language server cli entrypoint."""
     parser = argparse.ArgumentParser(
-        prog="nwscript-language-server",
+        prog="nwscriptd",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description="NWScript language server: an LSP wrapper for NWScript.",
         epilog="""\
 Examples:
 
-    Run over stdio     : nwscript-language-server
-    Run over tcp       : nwscript-language-server --tcp
+    Run over stdio     : nwscriptd
+    Run over tcp       : nwscriptd --tcp
     Run over websockets:
         # only need to pip install once per env
         pip install pygls[ws]
-        nwscript-language-server --ws
+        nwscriptd --ws
 
 Notes:
 

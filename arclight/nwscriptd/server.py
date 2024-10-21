@@ -32,7 +32,7 @@ class NWScriptLanguageServer(LanguageServer):
         super().__init__(*args)
 
 
-SERVER = NWScriptLanguageServer("nwscript-language-server", "v0.6.0")
+SERVER = NWScriptLanguageServer("nwscriptd", "v0.6.0")
 
 
 def _choose_markup(server: NWScriptLanguageServer) -> lsp.MarkupKind:

@@ -3,7 +3,7 @@ requires = ["poetry-core>=1.7.1"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "nwscript-language-server"
+name = "arclight"
 version = "0.12.dev0"
 description = "A language server for Bioware's nwscript"
 authors = ["jmd <joshua.m.dean@gmail.com>"]
@@ -12,6 +12,7 @@ homepage = "https://github.com/jd28/nwscript-lsp"
 repository = "https://github.com/jd28/nwscript-lsp"
 keywords = [
     "nwscript",
+    "Neverwinter Nights",
     "completion",
     "lsp",
     "language-server-protocol"
@@ -40,4 +41,4 @@ ruff = "*"
 toml-sort = "*"
 
 [tool.poetry.scripts]
-nwscript-language-server = 'nwscript_language_server.cli:cli'
+nwscriptd = 'arclight.nwscriptd.cli:cli'
