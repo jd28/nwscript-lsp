@@ -4,12 +4,12 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "arclight"
-version = "0.12.dev0"
-description = "A language server for Bioware's nwscript"
+version = "0.13.dev0"
+description = "A language server for Bioware's nwscript and more!"
 authors = ["jmd <joshua.m.dean@gmail.com>"]
 readme = "README.md"
-homepage = "https://github.com/jd28/nwscript-lsp"
-repository = "https://github.com/jd28/nwscript-lsp"
+homepage = "https://github.com/jd28/arclight-py"
+repository = "https://github.com/jd28/arclight-py"
 keywords = [
     "nwscript",
     "Neverwinter Nights",
