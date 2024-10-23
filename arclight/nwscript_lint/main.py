@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import rollnw
 import argparse
 import os
