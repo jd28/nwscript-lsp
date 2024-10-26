@@ -1,0 +1,7 @@
+2DX V2.1
+---
+column_rename:
+  STRING_REF: STRREF
+---
+           LABEL             STRING_REF   ICONRESREF
+0          MoveToPoint       6398         70_moveto

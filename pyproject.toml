@@ -1,33 +1,39 @@
 [build-system]
-requires = ["poetry-core>=1.7.1"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.7.1"]
 
 [tool.poetry]
-name = "arclight"
-version = "0.14.dev0"
-description = "A language server for Bioware's nwscript and more!"
 authors = ["jmd <joshua.m.dean@gmail.com>"]
-readme = "README.md"
-homepage = "https://github.com/jd28/arclight-py"
-repository = "https://github.com/jd28/arclight-py"
-keywords = [
-    "nwscript",
-    "Neverwinter Nights",
-    "completion",
-    "lsp",
-    "language-server-protocol"
-]
 classifiers = [
-    "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3",
+]
+description = "A language server for Bioware's nwscript and more!"
+homepage = "https://github.com/jd28/arclight-py"
+
+keywords = [
+  "nwscript",
+  "Neverwinter Nights",
+  "completion",
+  "lsp",
+  "language-server-protocol",
+]
+name = "arclight"
+readme = "README.md"
+repository = "https://github.com/jd28/arclight-py"
+version = "0.14.dev0"
+include = [
+  "arclight/data/2dasource.zip",
 ]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-rollnw = ">=0.41.dev0"
-pygls = "^1.2.1"
 cattrs = ">=23.1.2"
 docstring-to-markdown = "0.*"
 lsprotocol = ">=2022.0.0a9"
+prettytable = "^3.11"
+pygls = "^1.2.1"
+python = "^3.10"
+openpyxl = "^3.1"
+rollnw = ">=0.41.dev0"
 
 [tool.poetry.dev-dependencies]
 PyHamcrest = "*"
@@ -41,5 +47,6 @@ ruff = "*"
 toml-sort = "*"
 
 [tool.poetry.scripts]
-nwscriptd = 'arclight.nwscriptd.cli:cli'
+2dilate = 'arclight.twodilate.main:main'
 nwscript-lint = 'arclight.nwscript_lint.main:main'
+nwscriptd = 'arclight.nwscriptd.cli:cli'

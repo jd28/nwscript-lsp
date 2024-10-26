@@ -1,0 +1,81 @@
+2DX V2.1
+---
+tlk:
+    StrRef: 1000
+---
+    Label                  ScriptingName                  BMPResRef   TileSet StrRef
+510 "CTP Black Desert 1"   AREA_TRANSITION_BD_01          ls_tcbd0_01 TCBD0   ****
+511 "CTP Black Desert 2"   AREA_TRANSITION_BD_02          ls_tcbd0_02 TCBD0   ****
+512 "CTP Black Desert 3"   AREA_TRANSITION_BD_03          ls_tcbd0_03 TCBD0   ****
+513 "CTP Black Desert 4"   AREA_TRANSITION_BD_04          ls_tcbd0_04 TCBD0   ****
+514 "CTP Black Desert 5"   AREA_TRANSITION_BD_05          ls_tcbd0_05 TCBD0   ****
+515 "CTP Brick Interior 1" AREA_TRANSITION_BI_01          ls_tcxi0_01 TCXI0   ****
+516 "CTP Brick Interior 2" AREA_TRANSITION_BI_02          ls_tcxi0_02 TCXI0   ****
+517 "CTP Brick Interior 3" AREA_TRANSITION_BI_03          ls_tcxi0_03 TCXI0   ****
+518 "CTP Brick Interior 4" AREA_TRANSITION_BI_04          ls_tcxi0_04 TCXI0   ****
+519 "CTP Brick Interior 5" AREA_TRANSITION_BI_05          ls_tcxi0_05 TCXI0   ****
+520 "CTP Dungeon LOK 1"    AREA_TRANSITION_DL_01          ls_tcdl0_01 TCDL0   ****
+521 "CTP Dungeon LOK 2"    AREA_TRANSITION_DL_02          ls_tcdl0_02 TCDL0   ****
+522 "CTP Dungeon LOK 3"    AREA_TRANSITION_DL_03          ls_tcdl0_03 TCDL0   ****
+523 "CTP Dungeon LOK 4"    AREA_TRANSITION_DL_04          ls_tcdl0_04 TCDL0   ****
+524 "CTP Dungeon LOK 5"    AREA_TRANSITION_DL_05          ls_tcdl0_05 TCDL0   ****
+525 "CTP Dwarf Halls 1"    AREA_TRANSITION_DH_01          ls_tcdh0_01 TCDH0   ****
+526 "CTP Dwarf Halls 2"    AREA_TRANSITION__DH_02         ls_tcdh0_02 TCDH0   ****
+527 "CTP Dwarf Halls 3"    AREA_TRANSITION__DH_03         ls_tcdh0_03 TCDH0   ****
+528 "CTP Dwarf Halls 4"    AREA_TRANSITION__DH_04         ls_tcdh0_04 TCDH0   ****
+529 "CTP Dwarf Halls 5"    AREA_TRANSITION__DH_05         ls_tcdh0_05 TCDH0   ****
+530 "CTP Elf Int 1"        AREA_TRANSITION_EI_01          ls_tcei0_01 TCEI0   ****
+531 "CTP Elf Int 2"        AREA_TRANSITION_EI_02          ls_tcei0_02 TCEI0   ****
+532 "CTP Elf Int 3"        AREA_TRANSITION_EI_03          ls_tcei0_03 TCEI0   ****
+533 "CTP Elf Int 4"        AREA_TRANSITION_EI_04          ls_tcei0_04 TCEI0   ****
+534 "CTP Elf Int 5"        AREA_TRANSITION_EI_05          ls_tcei0_05 TCEI0   ****
+535 "CTP Exp Elf City 1"   AREA_TRANSITION_EE_01          ls_tcee0_01 TCEE0   ****
+536 "CTP Exp Elf City 2"   AREA_TRANSITION_EE_02          ls_tcee0_02 TCEE0   ****
+537 "CTP Exp Elf City 3"   AREA_TRANSITION_EE_03          ls_tcee0_03 TCEE0   ****
+538 "CTP Exp Elf City 4"   AREA_TRANSITION_EE_04          ls_tcee0_04 TCEE0   ****
+539 "CTP Exp Elf City 5"   AREA_TRANSITION_EE_05          ls_tcee0_05 TCEE0   ****
+540 "CTP Cave Ruins 1"     AREA_TRANSITION_CR_01          ls_tccr0_01 TCCR0   ****
+541 "CTP Cave Ruins 2"     AREA_TRANSITION_CR_02          ls_tccr0_02 TCCR0   ****
+542 "CTP Cave Ruins 3"     AREA_TRANSITION_CR_03          ls_tccr0_03 TCCR0   ****
+543 "CTP Cave Ruins 4"     AREA_TRANSITION_CR_04          ls_tccr0_04 TCCR0   ****
+544 "CTP Cave Ruins 5"     AREA_TRANSITION_CR_05          ls_tccr0_05 TCCR0   ****
+545 "CTP Gothic Estates 1" AREA_TRANSITION_GE_01          ls_tcge0_01 TCGE0   ****
+546 "CTP Gothic Estates 2" AREA_TRANSITION_GE_02          ls_tcge0_02 TCGE0   ****
+547 "CTP Gothic Estates 3" AREA_TRANSITION_GE_03          ls_tcge0_03 TCGE0   ****
+548 "CTP Gothic Estates 4" AREA_TRANSITION_GE_04          ls_tcge0_04 TCGE0   ****
+549 "CTP Gothic Estates 5" AREA_TRANSITION_GE_05          ls_tcge0_05 TCGE0   ****
+610 "CTP Babylon"          AREA_TRANSITION_TCE_01         ls_tce_01   TCED0   ****
+611 "CTP Babylon"          AREA_TRANSITION_TCE_02         ls_tce_02   TCED0   ****
+612 "CTP Babylon"          AREA_TRANSITION_TCE_03         ls_tce_03   TCED0   ****
+613 "CTP Babylon"          AREA_TRANSITION_TCE_04         ls_tce_04   TCED0   ****
+614 "CTP Babylon"          AREA_TRANSITION_TCE_05         ls_tce_05   TCED0   ****
+615 "CTP Babylon"          AREA_TRANSITION_TCE_06         ls_tce_06   TCED0   ****
+616 "CTP Babylon"          AREA_TRANSITION_TCE_07         ls_tce_07   TCED0   ****
+617 "CTP Babylon"          AREA_TRANSITION_TCE_08         ls_tce_08   TCED0   ****
+618 "CTP Babylon"          AREA_TRANSITION_TCE_08         ls_tce_09   TCED0   ****
+619 "CTP Babylon"          AREA_TRANSITION_TCE_10         ls_tce_10   TCED0   ****
+620 "CTP Babylon"          AREA_TRANSITION_TCE_11         ls_tce_11   TCED0   ****
+621 "CTP Babylon"          AREA_TRANSITION_TCE_12         ls_tce_12   TCED0   ****
+622 "CTP Babylon"          AREA_TRANSITION_TCE_13         ls_tce_13   TCED0   ****
+623 "CTP Babylon"          AREA_TRANSITION_TCE_14         ls_tce_14   TCED0   ****
+624 "CTP Babylon"          AREA_TRANSITION_TCE_15         ls_tce_15   TCED0   ****
+625 "CTP Babylon"          AREA_TRANSITION_TCE_16         ls_tce_16   TCED0   ****
+626 "CTP Babylon"          AREA_TRANSITION_TCE_17         ls_tce_17   TCED0   ****
+627 "CTP Babylon"          AREA_TRANSITION_TCE_18         ls_tce_18   TCED0   ****
+628 "CTP Babylon"          AREA_TRANSITION_TCE_19         ls_tce_19   TCED0   ****
+629 "CTP Babylon"          AREA_TRANSITION_TCE_20         ls_tce_20   TCED0   ****
+630 "CTP Babylon"          AREA_TRANSITION_TCE_21         ls_tce_21   TCED0   ****
+631 "CTP Babylon"          AREA_TRANSITION_TCE_22         ls_tce_22   TCED0   ****
+632 "CTP Babylon"          AREA_TRANSITION_TCE_23         ls_tce_23   TCED0   ****
+633 "CTP Babylon"          AREA_TRANSITION_TCE_24         ls_tce_24   TCED0   ****
+634 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_25   TCED0   ****
+635 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_26   TCED0   ****
+636 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_27   TCED0   ****
+637 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_28   TCED0   ****
+638 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_29   TCED0   ****
+639 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_30   TCED0   ****
+640 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_31   TCED0   ****
+641 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_32   TCED0   ****
+642 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_33   TCED0   ****
+643 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_34   TCED0   ****
+644 "CTP Babylon"          AREA_TRANSITION_TCE_26         ls_tce_35   TCED0   ****
