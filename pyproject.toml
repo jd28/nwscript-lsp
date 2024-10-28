@@ -20,7 +20,7 @@ keywords = [
 name = "arclight"
 readme = "README.md"
 repository = "https://github.com/jd28/arclight-py"
-version = "0.14.dev0"
+version = "0.15.dev0"
 include = [
   "arclight/data/2dasource.zip",
 ]
@@ -33,7 +33,7 @@ prettytable = "^3.11"
 pygls = "^1.2.1"
 python = "^3.10"
 openpyxl = "^3.1"
-rollnw = ">=0.41.dev0"
+rollnw = ">=0.42.dev0"
 
 [tool.poetry.dev-dependencies]
 PyHamcrest = "*"
