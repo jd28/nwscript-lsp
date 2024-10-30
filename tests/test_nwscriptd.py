@@ -1,6 +1,6 @@
 """Test the CLI."""
 
-from nwscript_language_server.cli import cli, get_version
+from arclight.nwscriptd.cli import cli, get_version
 
 
 def test_get_version() -> None:

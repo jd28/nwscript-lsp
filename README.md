@@ -2,7 +2,7 @@
 
 # Arclight.py
 
-These are tools related to the Arclight project
+These are python tools related to the Arclight project and also an extestion library for the [rollnw](https://github.com/jd28/rollnw) python bindings, see the `util` module.
 
 ## Installation
 

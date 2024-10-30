@@ -29,6 +29,7 @@ include = [
 cattrs = ">=23.1.2"
 docstring-to-markdown = "0.*"
 lsprotocol = ">=2022.0.0a9"
+pillow = "^11.0"
 prettytable = "^3.11"
 pygls = "^1.2.1"
 python = "^3.10"
