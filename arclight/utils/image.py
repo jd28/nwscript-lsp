@@ -67,13 +67,6 @@ def make_minimap(area: rollnw.Area):
         """
         return [l[i:i + n] for i in range(0, len(l), n)]
 
-    def texture_to_image(resref: str):
-        image = rollnw.kernel.resman().texture(resref)
-        if image.channels() == 4:
-            return Image.frombytes("RGBA", (image.width(), image.height()), image.data())
-        else:
-            return Image.frombytes("RGB", (image.width(), image.height()), image.data())
-
     scale = 1
     minimum = 32
     texture_map = {}
@@ -122,7 +115,16 @@ def make_minimap(area: rollnw.Area):
     return image
 
 
+def texture_to_image(resref: str):
+    image = rollnw.kernel.resman().texture(resref)
+    if image.channels() == 4:
+        return Image.frombytes("RGBA", (image.width(), image.height()), image.data())
+    else:
+        return Image.frombytes("RGB", (image.width(), image.height()), image.data())
+
+
 __all__ = [
     "item_to_image",
-    "make_minimap"
+    "make_minimap",
+    "texture_to_image",
 ]
