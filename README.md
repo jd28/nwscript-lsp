@@ -101,6 +101,25 @@ options:
   -h, --help  show this help message and exit
 ```
 
+## erfherder-cli - v0.1
+
+A tool for wrangling containers.
+
+### Usage - `erfherder-cli extract`
+
+```
+usage: erfherder-cli extract [-h] [--regex] [--output OUTPUT] pattern containers [containers ...]
+
+positional arguments:
+  pattern          Search pattern
+  containers       Containers to search.
+
+options:
+  -h, --help       show this help message and exit
+  --regex          Use regex instead of Unix wildcard format
+  --output OUTPUT  Specify the output directory (default: current directory '.').
+```
+
 ## [nwscriptd](arclight/nwscriptd/README.md)
 
 A language server for nwscript. See the [README](arclight/nwscriptd/README.md).

@@ -49,5 +49,6 @@ toml-sort = "*"
 
 [tool.poetry.scripts]
 2dilate = 'arclight.twodilate.main:main'
+erfherder-cli = 'arclight.erfherder_cli.main:main'
 nwscript-lint = 'arclight.nwscript_lint.main:main'
 nwscriptd = 'arclight.nwscriptd.cli:cli'
