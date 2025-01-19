@@ -377,8 +377,11 @@ def merge_2dx_files(args):
         if not args.force:
             with importlib.resources.path("arclight.data", "2dasource.zip") as zip_path:
                 with zipfile.ZipFile(zip_path, 'r') as zf:
-                    defcont = zf.read(basef)
-                    default = rollnw.TwoDA.from_string(defcont)
+                    try:
+                        defcont = zf.read(basef)
+                        default = rollnw.TwoDA.from_string(defcont)
+                    except KeyError:
+                        print(f"'{basef}' not found in the 2dasource zip file.")
 
         merged = False
         for twodx in twodxs:
