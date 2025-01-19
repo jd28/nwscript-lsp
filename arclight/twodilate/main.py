@@ -267,8 +267,10 @@ class TwoDXMerger:
         if highest > 0 and highest >= self.twoda.rows():
             self.twoda.pad((highest - self.twoda.rows()) + 1)
 
+        new_columns = []
         for c in self.twodx.columns[1:]:
-            self.twoda.add_column(c)
+            if (self.twoda.add_column(c)):
+                new_columns.append(c)
 
         for r in self.twodx.rows:
             row = int(r[0])
@@ -277,9 +279,11 @@ class TwoDXMerger:
                 new = r[col]
                 if new == '####':
                     continue
-                if (self.default
-                   and row < self.default.rows()
-                   and self.default.column_index(c) != ctypes.c_uint64(-1).value):
+                if c in new_columns:
+                    self.twoda.set(row, c, new)
+                elif (self.default
+                      and row < self.default.rows()
+                      and self.default.column_index(c) != ctypes.c_uint64(-1).value):
                     orig = self.default.get(row, c)
                     cur = self.twoda.get(row, c)
 
